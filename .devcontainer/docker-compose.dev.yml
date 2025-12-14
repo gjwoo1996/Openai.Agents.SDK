@@ -1,0 +1,51 @@
+services:
+  workspace:
+    container_name: personal_agents_sdk_devcontainer
+    image: mcr.microsoft.com/devcontainers/base:bullseye
+    command: sleep infinity
+
+    ports:
+      - '5173:5173'   # 프론트엔드 (Vite 개발 서버)
+      - '8080:8080'   # 백엔드
+
+    volumes:
+      - ..:${containerWorkspaceFolder}:cached
+
+    # depends_on:
+    #   mariadb:
+    #     condition: service_healthy
+
+    env_file:
+      - .env
+
+    environment:
+      - TZ=Asia/Seoul
+
+    networks:
+      - dev-network
+
+  # mariadb:
+  #   container_name: gssi_ai_chatbot_mariadb
+  #   image: mariadb:11.3
+  #   ports:
+  #     - '13306:3306'
+  #   volumes:
+  #     - ./data:/var/lib/mysql
+  #   environment:
+  #     - TZ=Asia/Seoul
+  #     - MYSQL_ROOT_PASSWORD=rootpassword_gangseo
+  #     - MYSQL_DATABASE=gangseo_chatbot
+  #     - MYSQL_USER=appuser
+  #     - MYSQL_PASSWORD=apppassword
+  #   networks:
+  #     - dev-network
+  #   healthcheck:
+  #     test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #     start_period: 30s
+
+networks:
+  dev-network:
+    driver: bridge

@@ -1,0 +1,28 @@
+{
+  "name": "openai.agents.sdk",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm run start:dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev": "concurrently -k \"npm run dev:backend\" \"wait-on tcp:9090 && npm run dev:frontend\"",
+    "build:frontend": "npm run build --workspace=frontend",
+    "build": "npm run build:frontend && npm run build --workspace=backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "wait-on": "^8.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-personal:gjwoo1996/Openai.Agents.SDK.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
