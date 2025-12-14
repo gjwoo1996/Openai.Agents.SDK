@@ -21,6 +21,11 @@
   // 포트 포워딩 - 프론트엔드(5173) + 백엔드(8080)
   "forwardPorts": [8080],
 
+    // SSH 설정 마운트 (WSL2의 SSH 키와 config 사용)
+    // "mounts": [
+    //   "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+    // ],
+
   // Custom - 확장 프로그램 통합
   "customizations": {
     "vscode": {
