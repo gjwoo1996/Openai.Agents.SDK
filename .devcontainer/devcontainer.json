@@ -22,9 +22,9 @@
   "forwardPorts": [8080],
 
     // SSH 설정 마운트 (WSL2의 SSH 키와 config 사용)
-    // "mounts": [
-    //   "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
-    // ],
+    "mounts": [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+    ],
 
   // Custom - 확장 프로그램 통합
   "customizations": {
