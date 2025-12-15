@@ -5,8 +5,8 @@ services:
     command: sleep infinity
 
     ports:
-      - '5173:5173'   # 프론트엔드 (Vite 개발 서버)
-      - '8080:8080'   # 백엔드
+      - '25173:5173'   # 프론트엔드 (Vite 개발 서버)
+      - '28080:8080'   # 백엔드
 
     volumes:
       - ..:${containerWorkspaceFolder}:cached
