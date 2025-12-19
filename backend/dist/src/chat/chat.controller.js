@@ -8,10 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatController = void 0;
 const common_1 = require("@nestjs/common");
 const chat_service_1 = require("./chat.service");
+const request_sse_dto_1 = require("./dto/request.sse.dto");
+const rxjs_1 = require("rxjs");
+const timers_1 = require("timers");
 let ChatController = class ChatController {
     chatService;
     constructor(chatService) {
@@ -19,6 +25,16 @@ let ChatController = class ChatController {
     }
     getRoomId() {
         return this.chatService.createChatRoom();
+    }
+    sse(requestSseDto) {
+        return new rxjs_1.Observable((observer) => {
+            const interval = setInterval(() => {
+                observer.next({
+                    data: JSON.stringify(requestSseDto.id),
+                });
+            }, 1000);
+            return () => (0, timers_1.clearInterval)(interval);
+        });
     }
 };
 exports.ChatController = ChatController;
@@ -28,6 +44,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ChatController.prototype, "getRoomId", null);
+__decorate([
+    (0, common_1.Sse)('sse'),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [request_sse_dto_1.RequestSseDto]),
+    __metadata("design:returntype", rxjs_1.Observable)
+], ChatController.prototype, "sse", null);
 exports.ChatController = ChatController = __decorate([
     (0, common_1.Controller)('chat'),
     __metadata("design:paramtypes", [chat_service_1.ChatService])

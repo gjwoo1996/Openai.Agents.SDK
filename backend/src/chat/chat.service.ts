@@ -24,4 +24,8 @@ export class ChatService {
 
     return { id: chatRoom.id };
   }
+
+  // getStream(chatRoomId: number): Observable<MessageEvent> {
+  //   return;
+  // }
 }
